@@ -11,16 +11,20 @@ app.post('/translate', async (req, res) => {
   const { text, target } = req.body;
 
   try {
-    const response = await axios.post('https://translate.argosopentech.com/translate', {
-      q: text,
-      source: 'auto',
-      target: target,
-      format: 'text'
-    });
+    const response = await axios.post(
+      "https://translate.argosopentech.com/translate",
+      {
+        q: text,
+        source: source || "auto",
+        target: target,
+        format: "text",
+      }
+    );
 
     res.json(response.data);
   } catch (error) {
-    res.status(500).send('Error translating');
+    console.error(error.message);
+    res.status(500).json({ error: "Translation failed" });
   }
 });
 
