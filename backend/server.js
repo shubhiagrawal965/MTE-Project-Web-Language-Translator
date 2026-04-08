@@ -12,12 +12,24 @@ app.post("/translate", async (req, res) => {
 
   try {
     const response = await axios.get(
-      `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|${target}`
+      "https://translate.googleapis.com/translate_a/single",
+      {
+        params: {
+          client: "gtx",
+          sl: "auto",
+          tl: target,
+          dt: "t",
+          q: text,
+        },
+      }
     );
 
-    res.json({
-      translatedText: response.data.responseData.translatedText,
-    });
+    // Extract translated text
+    const translatedText = response.data[0]
+      .map((item) => item[0])
+      .join("");
+
+    res.json({ translatedText });
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ error: "Translation failed" });
