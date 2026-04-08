@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 app.post('/translate', async (req, res) => {
-  const { text, target } = req.body;
+  const { text, target, source  } = req.body;
 
   try {
     const response = await axios.post(
