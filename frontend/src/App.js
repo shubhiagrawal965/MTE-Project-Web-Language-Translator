@@ -29,7 +29,7 @@ function App() {
 
     setLoading(true);
     try {
-      const res = await axios.post("http://localhost:5000/translate", {
+      const res = await axios.post("https://mte-project-web-language-translator.onrender.com/translate", {
         text,
         target: targetLang,
         source: sourceLang
