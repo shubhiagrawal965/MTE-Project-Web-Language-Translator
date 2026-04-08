@@ -11,7 +11,7 @@ app.post('/translate', async (req, res) => {
   const { text, target } = req.body;
 
   try {
-    const response = await axios.post('https://libretranslate.de/translate', {
+    const response = await axios.post('https://translate.argosopentech.com/translate', {
       q: text,
       source: 'auto',
       target: target,
